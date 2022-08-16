@@ -17,6 +17,10 @@ Your WSL versions: [run `wsl --version` on Windows command prompt]
 
 # Steps to reproduce
 
+**(Optional) Verifiy using the latest release of WSL/WSLg**:
+
+It is always good idea to verify the issue is still reproducible on the latest WSL/WSLg release whenever possible. WSL/WSLg can be updated from https://aka.ms/wslstorepage, or when Microsoft Store is not accessible from your environment, by downloading the latest release package (.msixbundle) from https://github.com/microsoft/WSL/releases.
+
 <!--
 Collect WSL logs if needed by following these instructions: https://github.com/Microsoft/WSL/blob/master/CONTRIBUTING.md#8-detailed-logs  
 -->
