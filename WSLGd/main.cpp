@@ -314,6 +314,10 @@ try {
     limit.rlim_max = RLIM_INFINITY;
     THROW_LAST_ERROR_IF(setrlimit(RLIMIT_CORE, &limit) < 0);
 
+    THROW_LAST_ERROR_IF(getrlimit(RLIMIT_NOFILE, &limit) < 0);
+    limit.rlim_cur = limit.rlim_max;
+    THROW_LAST_ERROR_IF(setrlimit(RLIMIT_NOFILE, &limit) < 0);
+
     // create folder to store core files.
     std::filesystem::create_directories(c_coreDir);
     THROW_LAST_ERROR_IF(chmod(c_coreDir, 0777) < 0);
@@ -411,7 +415,10 @@ try {
             std::vector<std::string>{
                 std::move(socketEnvString),
                 "WSLGD_NOTIFY_SOCKET=" WESTON_NOTIFY_SOCKET,
-                "WESTON_DISABLE_ABSTRACT_FD=1"
+                "WESTON_DISABLE_ABSTRACT_FD=1",
+                "WLOG_APPENDER=file",
+                "WLOG_FILEAPPENDER_OUTPUT_FILE_NAME=wlog.log",
+                "WLOG_FILEAPPENDER_OUTPUT_FILE_PATH=" SHARE_PATH
             }
         );
 
